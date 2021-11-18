@@ -3,7 +3,10 @@ class LocationsController < ApplicationController
 
 
   def index 
-    @locations = Location.all.sort_by{ |location| location.highest_reported.inches }.reverse  
+    locations_with_reports = Location.all.select { |location| location.reports.count > 0}
+    location_without_reports = Location.all.select{ |location| location.reports.count == 0}
+
+    @locations = locations_with_reports.sort_by{|location| location.highest_reported.inches }.reverse + location_without_reports
   end
 
   def new 
@@ -16,7 +19,7 @@ class LocationsController < ApplicationController
       redirect_to locations_path
       flash[:alert] = "Location correctly added"
     else 
-      render :new
+      redirect_to new_location_path, alert: "#{@location.errors.messages[:zipcode][0]}"
     end
   end
 
@@ -32,7 +35,7 @@ class LocationsController < ApplicationController
     if @location.update(location_params)
       redirect_to locations_path
     else 
-      redirect_to edit_location_path(@location)
+      redirect_to edit_location_path(@location), alert: "#{@location.errors.messages[:zipcode][0]}"
     end
   end
 
