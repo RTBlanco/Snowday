@@ -10,7 +10,20 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body>  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- <a class="navbar-brand" href="#">Locations</a> -->
+      <%= link_to "Locations", locations_path, class: "navbar-brand"  %>
+      <img id="logo" src="https://snowday-kga.herokuapp.com/assets/logo-386e5ef6319ed31dd591002c3e0f23914cc37a36357bb5939be74836c3ce9e8d.png" alt="logo" style="width: 60px;">
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+        </form>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>

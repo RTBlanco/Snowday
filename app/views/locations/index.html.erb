@@ -1,0 +1,37 @@
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ZIPCODE</th>
+      <th scope="col">LARGEST REPORTED SNOWFALL</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @locations.each do |location| %>
+      <tr>
+        <th scope="row"><%= link_to location.zipcode, location_path(location) %></th>
+        <td><%= location.highest_reported ? location.highest_reported.inches.round : "No reports yet"  %></td>
+        <td><%= link_to "New Report", new_location_report_path(location), class: "btn btn-primary" %></td>
+      </tr>
+    <% end %>
+
+    <%# <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr> %>
+  </tbody>
+
+
+</table>
+
+<%= link_to "New Location", new_location_path, class: "btn btn-primary" %>
