@@ -1,9 +1,9 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:destroy, :edit, :shot, :update]
+  before_action :set_location, only: [:destroy, :edit, :show, :update]
 
 
   def index 
-    @locations = Location.all 
+    @locations = Location.all.sort_by{ |location| location.highest_reported.inches }.reverse  
   end
 
   def new 
@@ -14,6 +14,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
     if @location.save
       redirect_to locations_path
+      flash[:alert] = "Location correctly added"
     else 
       render :new
     end

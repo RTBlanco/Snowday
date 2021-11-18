@@ -2,8 +2,9 @@
 <p> Where should we add to our database? <p>
 
 <%= form_for location do |f| %>
-  <%= f.label :zipcode %>
-  <%= f.text_field :zipcode %>
-  
-  <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :zipcode %>
+    <%= f.text_field :zipcode, class: 'form-control'%>
+  </div>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>

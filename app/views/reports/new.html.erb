@@ -1,0 +1,10 @@
+<h1>New report</h1>
+<p> How much snow fell at <% @location.zipcode%> <p>
+
+<%= form_for @report, url: location_reports_path(@location) do |f| %>
+  <div class="form-group">
+    <%= f.label :inches %>
+    <%= f.text_field :inches, class: 'form-control'%>
+  </div>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>
