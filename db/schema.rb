@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_154627) do
 
   create_table "reports", force: :cascade do |t|
     t.float "inches"
-    t.integer "location_id"
+    t.bigint "location_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["location_id"], name: "index_reports_on_location_id"
