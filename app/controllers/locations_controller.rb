@@ -6,6 +6,21 @@ class LocationsController < ApplicationController
     locations_with_reports = Location.all.select { |location| location.reports.count > 0}
     location_without_reports = Location.all.select{ |location| location.reports.count == 0}
 
+    # possibly faster 
+    # locations_hash = {
+    #   with: [],
+    #   without: []
+    # }
+
+    # Location.all.each do |location|
+    #   if location.reports.count > 0
+    #     location_hash[:with] << location
+    #   else
+    #     location_hash[:without] << location
+    #   end
+    # end
+
+
     @locations = locations_with_reports.sort_by{|location| location.highest_reported.inches }.reverse + location_without_reports
   end
 
