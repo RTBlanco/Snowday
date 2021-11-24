@@ -7,21 +7,21 @@ class LocationsController < ApplicationController
     location_without_reports = Location.all.select{ |location| location.reports.count == 0}
 
     # possibly faster 
-    # locations_hash = {
-    #   with: [],
-    #   without: []
-    # }
+    locations_hash = {
+      with: [],
+      without: []
+    }
 
-    # Location.all.each do |location|
-    #   if location.reports.count > 0
-    #     location_hash[:with] << location
-    #   else
-    #     location_hash[:without] << location
-    #   end
-    # end
+    Location.all.each do |location|
+      if location.reports.count > 0
+        locations_hash[:with] << location
+      else
+        locations_hash[:without] << location
+      end
+    end
 
-
-    @locations = locations_with_reports.sort_by{|location| location.highest_reported.inches }.reverse + location_without_reports
+    @locations = locations_hash[:with].sort_by{|l| l.highest_reported.inches}.reverse + locations_hash[:without]
+    # @locations = locations_with_reports.sort_by{|location| location.highest_reported.inches }.reverse + location_without_reports
   end
 
   def new 
